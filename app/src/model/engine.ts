@@ -44,7 +44,8 @@ export function runModel(inputs: ModelInputs): ModelOutputs {
   // Literature often reports b₀ in Pa⁻¹, bar⁻¹, or atm⁻¹ — unit mismatch = 1000x error.
   function langmuir(T: number, P_CO2_pa: number): number {
     const P_CO2_kpa = P_CO2_pa / 1000;
-    const b_T = b0 * Math.exp(-DeltaH_J / (R * T));
+    // +DeltaH because DeltaH_ads is positive (exothermic): b must increase at lower T
+    const b_T = b0 * Math.exp(DeltaH_J / (R * T));
     return (q_m * b_T * P_CO2_kpa) / (1 + b_T * P_CO2_kpa);
   }
 
