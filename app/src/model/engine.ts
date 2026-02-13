@@ -40,6 +40,8 @@ export function runModel(inputs: ModelInputs): ModelOutputs {
   // §7 Langmuir Isotherm
   const DeltaH_J = DeltaH_ads * 1000;
 
+  // CRITICAL: b₀ is in kPa⁻¹. P_CO₂ is converted to kPa before use.
+  // Literature often reports b₀ in Pa⁻¹, bar⁻¹, or atm⁻¹ — unit mismatch = 1000x error.
   function langmuir(T: number, P_CO2_pa: number): number {
     const P_CO2_kpa = P_CO2_pa / 1000;
     const b_T = b0 * Math.exp(-DeltaH_J / (R * T));

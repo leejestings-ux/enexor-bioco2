@@ -285,6 +285,18 @@ export default function App() {
               </span>
             </div>
           )}
+          {r.binding_constraint === 'adsorption' && r.Delta_q > 0 && (
+            <div style={{
+              background: 'rgba(245,158,11,0.06)', border: '1px solid rgba(245,158,11,0.2)',
+              borderRadius: 6, padding: '8px 12px', marginBottom: 14,
+              display: 'flex', alignItems: 'center', gap: 8,
+            }}>
+              <span style={{ fontSize: 13 }}>⚠</span>
+              <span style={{ fontSize: 11, color: C.amber }}>
+                Adsorption-limited — actual capture rate may be 10–30% lower due to mass transfer zone breakthrough. Apply 0.75–0.85 utilization factor until bench data is available.
+              </span>
+            </div>
+          )}
           {r.Delta_q <= 0 && (
             <div style={{
               background: 'rgba(239,68,68,0.06)', border: '1px solid rgba(239,68,68,0.2)',
@@ -293,7 +305,7 @@ export default function App() {
             }}>
               <span style={{ fontSize: 13 }}>⚠</span>
               <span style={{ fontSize: 11, color: C.red }}>
-                Working capacity ≤ 0. Check: b₀ parameter, T_reg vs T_ads differential, or CO₂ partial pressures.
+                Working capacity ≤ 0. Check: b₀ parameter (verify kPa⁻¹ units), T_reg vs T_ads differential, or CO₂ partial pressures.
               </span>
             </div>
           )}
